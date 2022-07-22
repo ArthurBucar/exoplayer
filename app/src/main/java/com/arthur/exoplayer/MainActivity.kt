@@ -26,11 +26,10 @@ class MainActivity : AppCompatActivity(), Player.Listener {
         title = findViewById(R.id.title)
 
         setUpPlayer()
-        addMp3Files()
         addMP4Files()
 
         if (savedInstanceState != null) {
-            if (savedInstanceState.getInt("mediaItem") != 0) {
+            (savedInstanceState.getInt("mediaItem")).let {
                 val restoredMediaItem = savedInstanceState.getInt("mediaItem")
                 val seekTime = savedInstanceState.getLong("SeekTime")
                 player.seekTo(restoredMediaItem, seekTime)
@@ -76,12 +75,6 @@ class MainActivity : AppCompatActivity(), Player.Listener {
                 progress.visibility = View.INVISIBLE
             }
         }
-    }
-
-    private fun addMp3Files(){
-        val mediaItem = MediaItem.fromUri(getString(R.string.test_mp3))
-        player.addMediaItem(mediaItem)
-        player.prepare()
     }
 
     override fun onStop() {
